@@ -1,0 +1,99 @@
+package Tn.Pixemantic.DoctorPatientAppointment.Entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="user")
+public class User {
+    public User(){}
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="user_id")
+    private int userId;
+
+    @Column(name="email")
+    private String email;
+
+    @Column(name="password")
+    private String password;
+
+    @Column (name="type")
+    @Enumerated(EnumType.STRING)
+    private UserType type;
+
+    @Column (name="account_confirmed", columnDefinition = "boolean default false")
+    private Boolean confirmed;
+
+    // TODO Find a better way to manage referrals
+    @Column (name="referral_id", nullable = true)
+    private Long referralId;
+
+    public User(String email, String password)
+    {
+        this.email = email;
+        this.password = password;
+    }
+    public User(String email, String password, UserType type, Boolean confirmed, Long referralId) {
+        this.email = email;
+        this.password = password;
+        this.type = type;
+        this.confirmed = confirmed;
+        this.referralId = referralId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserType getType() {
+        return type;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
+    }
+
+    public Boolean getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public Long getReferralId() {
+        return referralId;
+    }
+
+    public void setReferralId(Long referralId) {
+        this.referralId = referralId;
+    }
+}
